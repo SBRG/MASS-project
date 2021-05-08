@@ -70,7 +70,6 @@ python_files = [
 [tool.coverage.paths]
 source = [
     "src",
-    "tests",
 ]
 
 
@@ -114,13 +113,16 @@ python =
 
 [testenv]
 description = Base test environment configuration.
+distshare={homedir}/.tox/distshare
 passenv =
     PY_COLORS
 setenv =
     PYTHONPATH={toxinidir}/tests
     PYTHONUNBUFFERED=yes
     PY_COLORS={env:PY_COLORS:1}
-
+depends =
+    py3{6,7,8,9}: lint, clean
+    report: py3{6,7,8,9}
 
 [testenv:lint]
 description = Lint code via pre-commit hooks, finishing with isort --> black --> flake8
@@ -136,4 +138,29 @@ commands =
     pre-commit run --show-diff-on-failure --all-files
 
 
+[testenv:clean]
+description = Clean previous coverage reports.
+skip_install = true
+deps =
+    coverage[toml]
+commands =
+    coverage erase
+
+
+[testenv:py3{6,7,8,9}]
+description = Run tests under {basepython}.
+usedevelop = true
+extras = tests
+commands =
+    pytest {posargs: --cov --cov-report=term-missing --cov-append -vv}
+
+
+[testenv:report]
+description = Report coverage over all test runs.
+skip_install = true
+deps =
+    coverage[toml]
+commands =
+    coverage report
+    coverage html
 """
