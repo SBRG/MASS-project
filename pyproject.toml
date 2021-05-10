@@ -113,7 +113,6 @@ python =
 
 [testenv]
 description = Base test environment configuration.
-distshare={homedir}/.tox/distshare
 passenv =
     PY_COLORS
 setenv =
@@ -163,4 +162,5 @@ deps =
 commands =
     coverage report
     coverage html
+
 """
