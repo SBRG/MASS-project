@@ -10,8 +10,6 @@ graft references
 graft src
 graft tests
 
-recursive-exclude **/README.md
-
 global-exclude \
     *.py[cod] \
     __pycache__ \

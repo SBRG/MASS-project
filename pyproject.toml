@@ -14,12 +14,12 @@ build-backend = "setuptools.build_meta"
 
 
 [tool.towncrier]
-package = "mass_manager"
+package = "mass_project"
 package_dir = "src"
 filename = "NEWS.rst"
 directory = "news/"
 title_format = "{version} ({project_date})"
-issue_format = "`#{issue} <https://github.com/z-haiman/mass-manager/issues/{issue}>`_"
+issue_format = "`#{issue} <https://github.com/z-haiman/mass-project/issues/{issue}>`_"
 type = [
   { name = "Features",                  directory = "feature", showcontent = true },
   { name = "Bug Fixes",                 directory = "bugfix",  showcontent = true },
@@ -46,7 +46,7 @@ python-version = [
 [tool.isort]
 profile = "black"
 src_paths = [
-    "src/mass_manager"
+    "src/mass_project"
 ]
 indent = 4
 lines_after_imports = 2
@@ -149,13 +149,9 @@ commands =
 [testenv:py3{6,7,8,9}]
 description = Run tests under {basepython}.
 usedevelop = true
-deps =
-    pytest
-    pytest-cov
-    coverage[toml]
+extras = tests
 commands =
-    pytest {posargs: --cov --cov-append --cov-report=term-missing}
-
+    pytest {posargs: --cov --cov-report=term-missing --cov-append -vv}
 
 
 [testenv:report]
